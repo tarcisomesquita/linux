@@ -29,3 +29,10 @@ git clone https://github.com/cli/cli.git gh-cli
 cd gh-cli
 make install prefix=/path/to/gh
 
+
+git add .
+git commit -m "teste2"
+git push --set-upstream origin master
+fatal: Authentication failed for 'https://github.com/tarcisomesquita/linux.git/'
+
+https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories?tool=cli
