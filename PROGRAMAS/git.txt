@@ -36,3 +36,26 @@ git push --set-upstream origin master
 fatal: Authentication failed for 'https://github.com/tarcisomesquita/linux.git/'
 
 https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories?tool=cli
+
+gh auth login
+guest@slax:~/linux$ git remote set-url origin  https://github.com/tarcisomesquita/linux.git
+guest@slax:~/linux$ git remote -v
+origin  https://github.com/tarcisomesquita/linux.git (fetch)
+origin  https://github.com/tarcisomesquita/linux.git (push)
+guest@slax:~/linux$ git push --set-upstream origin main
+error: src refspec main does not match any
+error: failed to push some refs to 'https://github.com/tarcisomesquita/linux.git'
+guest@slax:~/linux$  git add .
+guest@slax:~/linux$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   PROGRAMAS/git.txt
+
+guest@slax:~/linux$ git commit -m "teste2"
+[master c38d6e1] teste2
+ 1 file changed, 7 insertions(+)
+guest@slax:~/linux$ git push --set-upstream origin master
+
+git add . &&  git commit -m "saving changes" &&  git push --set-upstream origin master
+
