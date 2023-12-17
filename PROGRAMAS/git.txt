@@ -12,16 +12,20 @@ git config --global user.email "tarcisomesquita@gmail.com"
 
 git clone https://github.com/tarcisomesquita/linux.git
 
-ou
-
-cd print_PE
-
 git init
 git add *
 git commit -m "first commit"
 git branch -M master
-git remote add origin https://github.com/tarcisomesquita/PE64_examples.git
+git remote add origin https://github.com/tarcisomesquita/linux.git
 git push -u origin master
 
+gh auth login
 
+git remote -v
+git remote remove origin
+git remote set-url origin https://github.com/tarcisomesquita/linux.git
+
+git clone https://github.com/cli/cli.git gh-cli
+cd gh-cli
+make install prefix=/path/to/gh
 
