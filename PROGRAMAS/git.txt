@@ -1,0 +1,27 @@
+
+wget -O /usr/share/keyrings/githubcli-archive-keyring.gpg https://cli.github.com/packages/githubcli-archive-keyring.gpg
+
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" > /etc/apt/sources.list.d/github-cli.list
+apt-get update
+apt-get install gh
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+git config --global user.name "tarcisomesquita"
+git config --global user.email "tarcisomesquita@gmail.com"
+
+git clone https://github.com/tarcisomesquita/linux.git
+
+ou
+
+cd print_PE
+
+git init
+git add *
+git commit -m "first commit"
+git branch -M master
+git remote add origin https://github.com/tarcisomesquita/PE64_examples.git
+git push -u origin master
+
+
+
