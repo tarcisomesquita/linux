@@ -57,5 +57,5 @@ guest@slax:~/linux$ git commit -m "teste2"
  1 file changed, 7 insertions(+)
 guest@slax:~/linux$ git push --set-upstream origin master
 
-git add . &&  git commit -m "saving changes" &&  git push --set-upstream origin master
+git add . &&  git commit -m "saving changes" &&  git push --set-upstream origin main
 
