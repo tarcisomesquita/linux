@@ -5,19 +5,57 @@ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/githubcli-archive-keyring.gp
 apt-get update
 apt-get install gh
 
+git --help
+git push --help
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+apt-get install dh-autoreconf libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc install-info
+
+download source from https://github.com/git/git/tags
+
+$ tar -zxf git-2.8.0.tar.gz
+$ cd git-2.8.0
+$ make configure
+$ ./configure --prefix=/usr
+$ make all doc info
+$ sudo make install install-doc install-html install-info
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+git clone https://github.com/cli/cli.git gh-cli
+cd gh-cli
+make install prefix=/path/to/gh
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+book
+https://github.com/progit/progit2
+
  = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 git config --global user.name "tarcisomesquita"
 git config --global user.email "tarcisomesquita@gmail.com"
+git config --global init.defaultBranch main
+git config --global core.editor nano
+
+git config --list --show-origin
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+cd /home/user/my_project
+git init
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 git clone https://github.com/tarcisomesquita/linux.git
 
-git init
-git add *
-git commit -m "first commit"
-git branch -M master
+git branch main
+
+git add .
+git commit -m "saving changes"
 git remote add origin https://github.com/tarcisomesquita/linux.git
-git push -u origin master
+git push -u origin main
 
 gh auth login
 
@@ -25,37 +63,60 @@ git remote -v
 git remote remove origin
 git remote set-url origin https://github.com/tarcisomesquita/linux.git
 
-git clone https://github.com/cli/cli.git gh-cli
-cd gh-cli
-make install prefix=/path/to/gh
-
-
-git add .
-git commit -m "teste2"
-git push --set-upstream origin master
-fatal: Authentication failed for 'https://github.com/tarcisomesquita/linux.git/'
-
 https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories?tool=cli
 
 gh auth login
-guest@slax:~/linux$ git remote set-url origin  https://github.com/tarcisomesquita/linux.git
-guest@slax:~/linux$ git remote -v
-origin  https://github.com/tarcisomesquita/linux.git (fetch)
-origin  https://github.com/tarcisomesquita/linux.git (push)
-guest@slax:~/linux$ git push --set-upstream origin main
-error: src refspec main does not match any
-error: failed to push some refs to 'https://github.com/tarcisomesquita/linux.git'
-guest@slax:~/linux$  git add .
-guest@slax:~/linux$ git status
-On branch master
-Changes to be committed:
-  (use "git restore --staged <file>..." to unstage)
-        modified:   PROGRAMAS/git.txt
+gh auth login --git-protocol https --web
+git push origin main
 
-guest@slax:~/linux$ git commit -m "teste2"
-[master c38d6e1] teste2
- 1 file changed, 7 insertions(+)
-guest@slax:~/linux$ git push --set-upstream origin master
 
-git add . &&  git commit -m "saving changes" &&  git push --set-upstream origin main
+git status
+
+git add . &&  git commit -m "saving changes" &&  git push --set-upstream origin master
+
+git ls-remote https://github.com/tarcisomesquita/linux.git
+
+git push REMOTE-NAME BRANCH-NAME
+git push origin main
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+https://raw.githubusercontent.com/progit/progit2/main/images/snapshots.svg
+
+you have the entire history of the project right there on your local disk
+Git uses the checksum SHA-1 hash
+
+states that your files can reside in: modified, staged, and committed
+
+git log --pretty=oneline
+git log -p -2 PROGRAMAS/git.txt
+git log --stat
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+example .gitignore file:
+
+# ignore all .a files
+*.a
+
+# but do track lib.a, even though you're ignoring .a files above
+!lib.a
+
+# only ignore the TODO file in the current directory, not subdir/TODO
+/TODO
+
+# ignore all files in any directory named build
+build/
+
+# ignore doc/notes.txt, but not doc/server/arch.txt
+doc/*.txt
+
+# ignore all .pdf files in the doc/ directory and any of its subdirectories
+doc/**/*.pdf
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+https://github.com/progit/progit2/blob/main/book/02-git-basics/sections/recording-changes.asc
+https://github.com/progit/progit2/blob/main/book/02-git-basics/sections/remotes.asc
+https://cli.github.com/
 
