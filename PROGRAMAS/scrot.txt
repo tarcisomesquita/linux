@@ -1,3 +1,5 @@
+scrot -o -a 0,85,800,600 ${TICKER}_60M.png
+
 scrot '%Y-%m-%d_%H-%M-%S_%z.bmp'
 
 -d, --delay NUM
