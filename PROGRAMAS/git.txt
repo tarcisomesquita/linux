@@ -7,6 +7,8 @@ repo: check
 
 git remote set-url origin https://<token>@github.com/<username>/<repo>
 
+usuario > settings > Sessions
+
 git config --global user.email "tarcisomesquita@gmail.com"
 git config --global user.name "tarcisomesquita"
 git config --list --show-origin
