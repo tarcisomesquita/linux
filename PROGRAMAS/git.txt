@@ -1,47 +1,24 @@
+apt-get install git
 
-wget -O /usr/share/keyrings/githubcli-archive-keyring.gpg https://cli.github.com/packages/githubcli-archive-keyring.gpg
+usuario > settings > Developer Settings > Personal Access tokens > Tokens (classic) > Generate new token > Generate new token (classic) > 
+note: comentário
+Expiration > custom > 1 day
+repo: check
 
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" > /etc/apt/sources.list.d/github-cli.list
-apt-get update
-apt-get install gh
+git remote set-url origin https://<token>@github.com/<username>/<repo>
+
+git config --global user.email "tarcisomesquita@gmail.com"
+git config --global user.name "tarcisomesquita"
+git config --list --show-origin
+
+git clone https://github.com/tarcisomesquita/texto.git
+
+git add .
+git commit -m "saving changes"
+git push origin main
 
 git --help
 git push --help
-
- = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-https://github.com/progit/progit2/
-
-apt-get install dh-autoreconf libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc install-info
-
-download source from https://github.com/git/git/tags
-
-$ tar -zxf git-2.8.0.tar.gz
-$ cd git-2.8.0
-$ make configure
-$ ./configure --prefix=/usr
-$ make all doc info
-$ sudo make install install-doc install-html install-info
-
- = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-git clone https://github.com/cli/cli.git gh-cli
-cd gh-cli
-make install prefix=/path/to/gh
-
- = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-book
-https://github.com/progit/progit2
-
- = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-git config --global user.name "tarcisomesquita"
-git config --global user.email "tarcisomesquita@gmail.com"
-git config --global init.defaultBranch main
-git config --global core.editor nano
-
-git config --list --show-origin
 
  = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
@@ -55,41 +32,63 @@ git clone https://github.com/tarcisomesquita/linux.git
 git switch main
 
 git status
-On branch main
-Your branch is up to date with 'origin/main'.
-
-nothing to commit, working tree clean
 
  = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-git add .
-git commit -m "saving changes"
 git remote add origin https://github.com/tarcisomesquita/linux.git
-git push -u origin main
-
-gh auth login
 
 git remote -v
 git remote remove origin
 git remote set-url origin https://github.com/tarcisomesquita/linux.git
 
-https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories?tool=cli
-
-gh auth login
-gh auth login --git-protocol https --web
-git push origin main
-
-
-git status
-
-git add . &&  git commit -m "saving changes" &&  git push --set-upstream origin master
-
 git ls-remote https://github.com/tarcisomesquita/linux.git
 
-git push REMOTE-NAME BRANCH-NAME
-git push origin main
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+cria um novo ramo e muda para ele
+command git checkout -b <branch-name>
+
+mudar de um ramo para outro, use:
+git checkout <branch-name>
+
+listar todos os ramos 
+git branch
+
+Para excluir um ramo:
+git branch –d <branch-name>
+
+mesclar uma ramificação ao ramo ativo
+git merge <branch-name>
+
+git diff <source-branch> <target-branch>
+
+git diff <source-branch> <target-branch>
 
  = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+git log
+
+redefinir o índice e o diretório de trabalho para o estado do último commit:
+git reset --hard HEAD
+
+git rm filename.txt
+
+git show
+
+obtenha todos os objetos do repositório remoto que atualmente não residem no diretório de trabalho local
+git fetch origin
+
+git ls-tree HEAD
+git cat-file –p d670460b4b4aece5915caf5c68d12f560a9fe3e4
+
+procure através das árvores de conteúdo frases e / ou palavras.
+git grep "palavra"
+
+git archive --format=tar master
+
+Apaga arquivo sem add?
+git prune
+
 
 https://raw.githubusercontent.com/progit/progit2/main/images/snapshots.svg
 
@@ -164,7 +163,5 @@ find .git/objects -type f
 git cat-file -p d670460b4b4aece5915caf5c68d12f560a9fe3e4
 
 git cat-file -p master^{tree}
-
-https://github.com/progit/progit2/blob/main/book/10-git-internals/sections/objects.asc
 
 
