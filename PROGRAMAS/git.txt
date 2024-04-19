@@ -112,6 +112,10 @@ cac0cab538b970a37ea1e769cbbde608743bc96d Second commit
 fdf4fc3344e67ab068f836878b6c4951e3b15f3d First commit
 Now, move the master branch back to the middle commit:
 $ git reset --hard 1a410efbd13591db07496601ebc7a059dd55cfe9
+apaga o histórico de log
+
+git revert --no-edit 6111116
+acrescenta um commit no histórico de log
 
  = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
