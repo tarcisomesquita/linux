@@ -1,6 +1,10 @@
+ps works by reading the virtual files in /proc. Not need to be setuid kmem or have any privileges to run.
 
 ps aux
 ps -e -o pid,args --sort pid
+
+list all processes
+ps -a -x -o ppid,pid,command
 
 PS(1)
 July 28, 2004
@@ -8,16 +12,11 @@ July 28, 2004
 SYNOPSIS
 ps [options]
 
-EXAMPLES
-To see every process on the system using standard syntax:
+-e  Select all processes. (every)
    ps -e
    ps -ef
    ps -eF
    ps -ely
-
-To see every process on the system using BSD syntax:
-   ps ax
-   ps axu
 
 To print a process tree:
    ps -ejH
@@ -36,69 +35,24 @@ To see every process running as root (real & effective ID) in user format:
 ps -U root -u root u
 
 
-SIMPLE PROCESS SELECTION
-a   list all processes with a terminal (tty), or to list all processes when used together with the x option.
--e  Select all processes. (every)
-r   Restrict the selection to only running processes.
-x   list all processes owned by you (same EUID as ps), or to list all processes when used together with the a option.
-
-
 OUTPUT FORMAT CONTROL
 -F   extra full format. See the -f option, which -F implies.
 
 
--O format       is like -o, but preloaded with some default columns. Identical to -o pid,format,state,tname,time,command or
-     -o pid,format,tname,time,cmd, see -o below.
+-o pid,format,state,tname,time,command
+-o pid,format,tname,time,cmd
 
+ps axf
+-f   does full-format listing. See the c option, the format keyword args, and the format keyword comm.
 
-O format        is preloaded o (overloaded).
-     The BSD O option can act like -O (user-defined output format with some common fields predefined) or can be used to specify sort
-     order. Heuristics are used to determine the behavior of this option. To ensure that the desired behavior is obtained (sorting or
-     formatting), specify the option in some other way (e.g. with -O or --sort). When used as a formatting option, it is identical to
-     -O, with the BSD personality.
-
-
-X    Register format.
-
--c   Show different scheduler information for the -l option.
-
-
--f   does full-format listing. This option can be combined with many other UNIX-style options to add additional columns. It also causes
-     the command arguments to be printed. When used with -L, the NLWP (number of threads) and LWP (thread ID) columns will be added.
-     See the c option, the format keyword args, and the format keyword comm.
-
-
--j   jobs format
-
--l   long format.
+ps -a -L -o ppid,pid,lwp,command
+lista threads
 
 -o format   user-defined format. See STANDARD FORMAT SPECIFIERS section below.
             Headers may be renamed (ps -o pid,ruser=RealUser -o comm=Command).
 
-u    display user-oriented format
-
---context       Display security context format. (for SE Linux)
-
-
 
 OUTPUT MODIFIERS
--H   show process hierarchy (forest)
-
-O order         Sorting order. (overloaded)
-     The BSD O option can act like -O (user-defined output format with some common fields predefined) or can be used to specify sort
-     order. Heuristics are used to determine the behavior of this option. To ensure that the desired behavior is obtained (sorting or
-     formatting), specify the option in some other way (e.g. with -O or --sort).
-
-     For sorting, obsolete BSD O option syntax is O[+|-]k1[,[+|-]k2[,...]]. It orders the processes listing according to the multilevel
-     sort specified by the sequence of one-letter short keys k1, k2, ... described in the OBSOLETE SORT KEYS section below. The "+" is
-     currently optional, merely re-iterating the default direction on a key, but may help to distinguish an O sort from an O format.
-     The "-" reverses direction only on the key it precedes.
-
-
-S    Sum up some information, such as CPU usage, from dead child processes into their parent. This is useful for examining a system
-     where a parent process repeatedly forks off short-lived children to do work.
-
-
 c    Show the true command name. This is derived from the name of the executable file, rather than from the argv value. Command
      arguments and any modifications to them (see setproctitle(3)) are thus not shown. This option effectively turns the args format
      keyword into the comm format keyword; it is useful with the -f format option and with the various BSD-style format options, which
@@ -144,55 +98,18 @@ k spec          specify sorting order. Sorting syntax is [+|-]key[,[+|-]key[,...
 n    Numeric output for WCHAN and USER. (including all types of UID and GID)
 
 
--w   Wide output. Use this option twice for unlimited width.
-
-
 w    Wide output. Use this option twice for unlimited width.
 
-
---cols n        set screen width
-
-
---columns n     set screen width
-
-
---cumulative    include some dead child process data (as a sum with the parent)
-
-
---forest        ASCII art process tree
-
-
---headers       repeat header lines, one per page of output
-
-
---no-headers    print no header line at all. --no-heading is an alias for this option.
-
-
---lines n       set screen height
-
-
---rows n        set screen height
-
-
---sort spec     specify sorting order. Sorting syntax is [+|-]key[,[+|-]key[,...]] Choose a multi-letter key from the STANDARD FORMAT SPECIFIERS
-     section. The "+" is optional since default direction is increasing numerical or lexicographic order. Identical to k. For example:
-     ps jax --sort=uid,-ppid,+pid
-
-
---width n       set screen width
-
-
+--sort spec
+   specify sorting order. Sorting syntax is [+|-]key[,[+|-]key[,...]]
+   Choose a multi-letter key from the STANDARD FORMAT SPECIFIERS section.
+   ps jax --sort=uid,-ppid,+pid
 
 THREAD DISPLAY
 H    Show threads as if they were processes
 -L   Show threads, possibly with LWP and NLWP columns
 -T   Show threads, possibly with SPID column
 -m   Show threads after processes
-
-
-NOTES
-This ps works by reading the virtual files in /proc. This ps does not need to be setuid kmem or have any privileges to run. Do not give this ps
-any special permissions.
 
 CPU usage is currently expressed as the percentage of time spent running during the entire lifetime of a process. This is not ideal, and it does
 not conform to the standards that ps otherwise conforms to. CPU usage is unlikely to add up to exactly 100%.
