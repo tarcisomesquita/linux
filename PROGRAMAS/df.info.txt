@@ -5,6 +5,9 @@ df [OPTION]... [FILE]...
 df -B M /dev/sda1 /dev/sda3
 df -B M /media/tmp
 
+cat /sys/block/sda/size # * 512
+cat /sys/block/sda/stat # https://docs.kernel.org/block/stat.html
+
 df displays the amount of disk space available on the file system containing each file name  argument.
 If  no file name is given, the space available on all currently mounted file systems is shown.
 
